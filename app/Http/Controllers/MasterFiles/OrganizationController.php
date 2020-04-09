@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MasterFiles;
 
 use App\Model\MasterFiles\Organization;
 use Illuminate\Http\Request;
@@ -49,15 +49,15 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
 
-        echo "store";
-        /*  $data = request()->validate([
-            'org_name' => 'require',
-            'agency_type_id' => 'require',
-            'tax_id' => 'require',
-            'multi_company' => 'require',
-            'cost_center_enable' => 'require'
-        ]); */
-        /* Organization::create($data); */
+
+        $data = request()->validate([
+            'org_name' => 'required',
+            'agency_type_id' => 'required',
+            'tax_id' => 'required',
+            'multi_company' => 'required',
+            'cost_center_enable' => 'required'
+        ]);
+        Organization::create($data);
     }
 
     /**
@@ -89,9 +89,19 @@ class OrganizationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request  $request, $id)
     {
-        //
+
+        $data = $request->validate([
+            'org_name' => 'required',
+            'agency_type_id' => 'required',
+            'tax_id' => 'required',
+            'multi_company' => 'required',
+            'cost_center_enable' => 'required'
+        ]);
+
+        $organization = Organization::where('id', '=', $id)->first();
+        $organization->update($data);
     }
 
     /**

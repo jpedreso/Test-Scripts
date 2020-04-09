@@ -19,14 +19,3 @@ Route::patch('/employee/{id}', 'EmployeeController@update'); */
 
 Route::resource('/employee', 'EmployeeController');
 Route::resource('/organization', 'MasterFiles\OrganizationController');
-/* Route::resource('organization', 'OrganizationController'); */
-/* 
-Route::patch('/employee', 'EmployeeController@update');
-Route::resource('/employee', 'EmployeeController'); */
-/* Route::match(['get', 'post', 'put'], '/employee', function () {
-    //
-}); */
-/* Route::resources([
-    '/employee' => 'EmployeeController@store',
-    'posts' => 'PostController'
-]); */
