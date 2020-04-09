@@ -26,18 +26,6 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-
-
-        /* print_r($request); */
-        /*   $data = request()->validate([
-            'org_name' => 'Tier3',
-            'agency_type_id' => 'Energy',
-            'tax_id' => '295-225-265',
-            'multi_company' => '1',
-            'cost_center_enable' => '1'
-        ]); */
-
-        /*  Employee::create($data); */
     }
 
     /**
@@ -48,16 +36,7 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        $data = request()->validate([
-            'org_name' => 'required',
-            'agency_type_id' => 'required',
-            'tax_id' => 'required',
-            'multi_company' => 'required',
-            'cost_center_enable' => 'required'
-        ]);
-        Organization::create($data);
+        Organization::create($this->validateRequest($request));
     }
 
     /**
@@ -91,17 +70,8 @@ class OrganizationController extends Controller
      */
     public function update(Request  $request, $id)
     {
-
-        $data = $request->validate([
-            'org_name' => 'required',
-            'agency_type_id' => 'required',
-            'tax_id' => 'required',
-            'multi_company' => 'required',
-            'cost_center_enable' => 'required'
-        ]);
-
-        $organization = Organization::where('id', '=', $id)->first();
-        $organization->update($data);
+        $organization = $this->where($id);
+        $organization->update($this->validateRequest($request));
     }
 
     /**
@@ -110,8 +80,26 @@ class OrganizationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request  $request, $id)
     {
-        //
+        $organization = $this->where($id);
+        $organization->delete();
+        return redirect('/organization');
+    }
+
+    protected function validateRequest($request)
+    {
+        return $request->validate([
+            'org_name' => 'required',
+            'agency_type_id' => 'required',
+            'tax_id' => 'required',
+            'multi_company' => 'required',
+            'cost_center_enable' => 'required'
+        ]);
+    }
+
+    protected function where($id)
+    {
+        return Organization::where('id', '=', $id)->first();
     }
 }

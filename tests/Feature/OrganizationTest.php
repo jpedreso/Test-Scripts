@@ -10,7 +10,6 @@ use Tests\TestCase;
 class OrganizationTest extends TestCase
 {
     use RefreshDatabase;
-
     /** @test **/
     public function add_Organization()
     {
@@ -79,5 +78,25 @@ class OrganizationTest extends TestCase
                 $org->cost_center_enable
             ]
         );
+    }
+
+    /** @test **/
+    public function delete_Organization()
+    {
+        $this->post('/organization', [
+            'org_name' => 'Tier3',
+            'agency_type_id' => 'Software Development',
+            'tax_id' => '295-225-265',
+            'multi_company' => '1',
+            'cost_center_enable' => '1'
+        ]);
+
+        $organization = Organization::first();
+        /* $this->assertCount(1, Organization::all()); */
+
+        $response = $this->delete('/organization/' . $organization->id);
+
+        $this->assertCount(0, Organization::all());
+        $response->assertRedirect('/organization');
     }
 }
