@@ -1,11 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-/*
 
-
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Model\MasterFiles\Organization;
 use Faker\Generator as Faker;
