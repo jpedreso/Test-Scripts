@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Model\MasterFiles\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use OrganizationSeeder;
 use Tests\TestCase;
 
 
@@ -98,5 +99,16 @@ class OrganizationTest extends TestCase
 
         $this->assertCount(0, Organization::all());
         $response->assertRedirect('/organization');
+    }
+
+    /** @test **/
+    public function testQwr()
+    {
+        /*   $this->seed(); */
+        /* $this->seed(Organization::class); */
+        $this->assertDatabaseHas(
+            "organizations",
+            [' org_name' => 'GBP']
+        );
     }
 }

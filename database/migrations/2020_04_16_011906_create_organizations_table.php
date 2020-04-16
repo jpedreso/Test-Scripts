@@ -15,12 +15,12 @@ class CreateOrganizationsTable extends Migration
     {
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->char('org_name', 100);
+            $table->string('org_name');
             $table->string('agency_type_id');
             $table->string('tax_id');
             $table->boolean('multi_company');
             $table->boolean('cost_center_enable');
+            $table->timestamps();
         });
     }
 

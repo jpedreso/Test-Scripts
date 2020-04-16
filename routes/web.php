@@ -20,3 +20,4 @@ Route::patch('/employee/{id}', 'EmployeeController@update'); */
 Route::resource('/employee', 'EmployeeController');
 Route::resource('/organization', 'MasterFiles\OrganizationController');
 Route::resource('/educationalLevel', 'MasterFiles\EducationalLevelController');
+Route::resource('/socialMediaType', 'MasterFiles\SocialMediaTypeController');
