@@ -24,7 +24,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Organization::class, function (Faker $faker) {
     return [
-        'org_name' => $faker->name,
+        'org_name' => $faker->company,
         'agency_type_id' => $faker->text,
         'tax_id' => $faker->text,
         'multi_company' =>  $faker->boolean,
